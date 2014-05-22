@@ -27,6 +27,6 @@
   },
   "homepage": "https://github.com/weisjohn/sleepyhollow-node",
   "devDependencies": {
-    "sleepyhollow-phantom": "0.1.0"
+    "sleepyhollow-phantom": "0.1.1"
   }
 }
