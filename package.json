@@ -25,5 +25,8 @@
   "bugs": {
     "url": "https://github.com/weisjohn/sleepyhollow-node/issues"
   },
-  "homepage": "https://github.com/weisjohn/sleepyhollow-node"
+  "homepage": "https://github.com/weisjohn/sleepyhollow-node",
+  "devDependencies": {
+    "sleepyhollow-phantom": "0.0.0"
+  }
 }
