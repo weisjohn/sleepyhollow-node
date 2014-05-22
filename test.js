@@ -1,7 +1,7 @@
 
 var assert = require('assert')
   , sleepyhollow = require('./')
-  , drjekyll = sleepyhollow(['node_modules/sleepyhollow-phantom/test.js'])
+  , drjekyll = sleepyhollow('node_modules/sleepyhollow-phantom/test.js')
   ;
 
 // the events we've seen, need to see
@@ -15,7 +15,7 @@ needed.forEach(function(need) {
 });
 
 // tell mrhyde to open github.com
-setTimeout(function() { drjekyll.emit('page', "http://github.com"); }, 1e3);
+setTimeout(function() { drjekyll.emit('page', "https://github.com/"); }, 1e3);
 drjekyll.on('render', function() { drjekyll.emit("end"); });
 
 // run tests when phantomjs finishes
