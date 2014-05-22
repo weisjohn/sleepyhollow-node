@@ -23,7 +23,7 @@ function windtalker(args) {
         writeBuffer = [];
     }
 
-    // the read mechanism that seclectively reads
+    // the read mechanism that selectively writes
     function read(data) {
         if (!data) return;
         try { data = JSON.parse(data) }
@@ -34,6 +34,7 @@ function windtalker(args) {
         _write();
     }
 
+    // event dispatching
     windtalker.on('write', function(event, message) {
         if (event == "ack") throw new Error("ack is a reserved event");
         write({ event: event, message : message });
