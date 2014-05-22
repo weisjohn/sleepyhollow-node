@@ -1,11 +1,11 @@
 
 var assert = require('assert')
   , sleepyhollow = require('./')
-  , drjekyll = sleepyhollow(['node_modules/sleepyhollow-phantom/index.js'])
+  , drjekyll = sleepyhollow(['node_modules/sleepyhollow-phantom/test.js'])
   ;
 
 // the events we've seen, need to see
-var events = [], needed = ["open", "exit", "ack" ];
+var events = [], needed = ["open", "render", "exit", "ack" ];
 
 // register event listeners
 needed.forEach(function(need) {
@@ -14,19 +14,20 @@ needed.forEach(function(need) {
     });
 });
 
-// emit a hello which should trigger an ack
-setInterval(function() {
-    drjekyll.emit('hello');
-}, 1e3);
+// tell mrhyde to open github.com
+setTimeout(function() { drjekyll.emit('page', "http://github.com"); }, 1e3);
+drjekyll.on('render', function() { drjekyll.emit("end"); });
 
 // run tests when phantomjs finishes
 drjekyll.on('exit', function() {
+    var success = true;
     needed.forEach(function(need) {
         var found = false;
         events.forEach(function(event) {
             if (need == event) found = true;
         });
         assert(found, need + " event was not fired");
+        if (!found) success = false;
     });
-    process.exit();
+    process.exit(success ? 0 : 1);
 });
