@@ -1,7 +1,7 @@
 
-var windtalker = require('./');
+var necromancer = require('./');
 
-var talker = windtalker(['phantom.js']);
+var talker = necromancer(['phantom.js']);
 
 talker.on('open', function() {
     console.log('open')

@@ -1,5 +1,5 @@
 {
-  "name": "windtalker",
+  "name": "necromancer",
   "version": "0.0.0",
   "description": "Two-way communication for PhantomJS and Node",
   "main": "index.js",
@@ -8,19 +8,20 @@
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/weisjohn/windtalker.git"
+    "url": "git://github.com/weisjohn/necromancer.git"
   },
   "keywords": [
     "phantomjs",
     "phantom",
     "IPC",
     "inter-process",
-    "two-way"
+    "two-way",
+    "necromancer"
   ],
   "author": "John Weis <weis.john@gmail.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/weisjohn/windtalker/issues"
+    "url": "https://github.com/weisjohn/necromancer/issues"
   },
-  "homepage": "https://github.com/weisjohn/windtalker"
+  "homepage": "https://github.com/weisjohn/necromancer"
 }
