@@ -19,7 +19,7 @@ drjekyll.on('rendered', function() {
 drjekyll.emit('end');
 ```
 
-[The corresponding PhantomJS code](https://github.com/weisjohn/sleepyhollow-phantom).
+[See the usage example for the corresponding PhantomJS code](https://github.com/weisjohn/sleepyhollow-phantom#usage).
 
 
 ### errors
