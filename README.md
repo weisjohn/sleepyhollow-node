@@ -1,7 +1,7 @@
 sleepyhollow-node
 ==========
 
-Node.js binder for two-way communication with PhantomJS. An IPC library in two modules, An IPC library in two modules, used in conjunction with [sleepyhollow-phantom](https://github.com/weisjohn/sleepyhollow-phantom), via `stdin` and `stdout`. No `socket.io` or server-page hacks required.
+Node.js binder for two-way communication with PhantomJS. An IPC library in two modules, used in conjunction with [sleepyhollow-phantom](https://github.com/weisjohn/sleepyhollow-phantom), via `stdin` and `stdout`. No `socket.io` or server-page hacks required.
 
 ### usage
 
