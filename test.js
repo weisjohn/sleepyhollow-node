@@ -1,28 +1,27 @@
 
-var necromancer = require('./');
+var sleepyhollow = require('./');
 
-var talker = necromancer(['phantom.js']);
+var drjekyll = sleepyhollow(['phantom.js']);
 
-talker.on('open', function() {
+drjekyll.on('open', function() {
     console.log('open')
 })
 
-talker.on('render', function() {
+drjekyll.on('render', function() {
     console.log('render')
 })
 
-talker.on('exit', function() {
+drjekyll.on('exit', function() {
     console.log('exit')
     process.exit();
 })
 
 setInterval(function() {
-    talker.emit('hello');
-    // talker.emit('ack')
+    drjekyll.emit('hello');
 }, 1e3)
 
 
 
-talker.on('ack', function(value) {
+drjekyll.on('ack', function(value) {
     console.log('phantomjs:', value)
 })

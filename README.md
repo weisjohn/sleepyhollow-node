@@ -1,4 +1,5 @@
-necromancer
+sleepyhollow-node
 ==========
 
-Two-way communication for PhantomJS and Node
+Node.js binder for two-way communication with PhantomJS. An IPC library in two modules.
+

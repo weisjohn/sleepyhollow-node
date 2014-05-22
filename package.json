@@ -1,14 +1,14 @@
 {
-  "name": "necromancer",
+  "name": "sleepyhollow-node",
   "version": "0.0.0",
-  "description": "Two-way communication for PhantomJS and Node",
+  "description": "Node.js binder for two-way communication with PhantomJS",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/weisjohn/necromancer.git"
+    "url": "git://github.com/weisjohn/sleepyhollow-node.git"
   },
   "keywords": [
     "phantomjs",
@@ -16,12 +16,14 @@
     "IPC",
     "inter-process",
     "two-way",
-    "necromancer"
+    "sleepyhollow",
+    "sleepyhollow-node",
+    "sleepyhollow-phantom"
   ],
   "author": "John Weis <weis.john@gmail.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/weisjohn/necromancer/issues"
+    "url": "https://github.com/weisjohn/sleepyhollow-node/issues"
   },
-  "homepage": "https://github.com/weisjohn/necromancer"
+  "homepage": "https://github.com/weisjohn/sleepyhollow-node"
 }

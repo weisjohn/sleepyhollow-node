@@ -2,19 +2,19 @@ var spawn = require('child_process').spawn
   , EventEmitter = require('events').EventEmitter
   ;
 
-function necromancer(args) {
+function sleepyhollow(args) {
 
     // the modified event-emitter bridge
-    var necromancer = new EventEmitter();
-    _emit = necromancer.emit;
-    necromancer.emit = function(event, message) {
+    var sleepyhollow = new EventEmitter();
+    _emit = sleepyhollow.emit;
+    sleepyhollow.emit = function(event, message) {
         if (event !== "ack") write({ event: event, message : message });
-        _emit.apply(necromancer, Array.prototype.slice.call(arguments, 0));
+        _emit.apply(sleepyhollow, Array.prototype.slice.call(arguments, 0));
     }
 
     // the phantomjs process
     var phantomjs = spawn('phantomjs', args);
-    phantomjs.on('exit', function() { necromancer.emit('exit'); });
+    phantomjs.on('exit', function() { sleepyhollow.emit('exit'); });
     phantomjs.stderr.on('data', function(data) {
         data.toString().split('\n').forEach(read);
     });
@@ -32,13 +32,13 @@ function necromancer(args) {
         if (!data) return;
         try { data = JSON.parse(data) }
         catch (e) { console.log(e, data); throw new Error(e); }
-        _emit.apply(necromancer, [data.event, data.message]);
+        _emit.apply(sleepyhollow, [data.event, data.message]);
         if (data.event == "ack") return;
         write({ "event": "ack" });
         _write();
     }
 
-    return necromancer;
+    return sleepyhollow;
 }
 
-module.exports = necromancer;
+module.exports = sleepyhollow;
