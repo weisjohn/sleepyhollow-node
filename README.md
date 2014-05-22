@@ -22,6 +22,21 @@ drjekyll.emit('end');
 [The corresponding PhantomJS code](https://github.com/weisjohn/sleepyhollow-phantom).
 
 
+### errors
+
+The error support in PhantomJS isn't the best. `sleepyhollow` provides one custom event to listen for errors in your script:
+
+```
+var sleepyhollow = require('sleepyhollow-node');
+var drjekyll = sleepyhollow('some-phantom-script.js');
+drjekyll.on('error', function(data) {
+    console.log(data);
+});
+```
+
+Anything that comes across `stdout` will be passed over to the `error` event handler, so if you `console.log` from your PhantomJS code, it will be sent to that handler.
+
+
 ### options
 
 To run PhantomJS with [advanced options](http://phantomjs.org/api/command-line.html), you can simply pass them when you invoke `sleepyhollow`. 
@@ -29,7 +44,7 @@ To run PhantomJS with [advanced options](http://phantomjs.org/api/command-line.h
 For example, to tell PhantomJS to ignore ssl errors:
 
 ```
-var me = sleepyhollow('myscript.js', '--ignore-ssl-errors=true');
+var me = sleepyhollow('--ignore-ssl-errors=true', 'myscript.js');
 ```
 
 
