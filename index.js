@@ -2,7 +2,7 @@ var spawn = require('child_process').spawn
   , EventEmitter = require('events').EventEmitter
   ;
 
-function sleepyhollow(args) {
+function sleepyhollow() {
 
     // the modified event-emitter bridge
     var sleepyhollow = new EventEmitter();
@@ -13,10 +13,17 @@ function sleepyhollow(args) {
     }
 
     // the phantomjs process
-    var phantomjs = spawn('phantomjs', args);
+    var args = Array.prototype.slice.call(arguments, 0);
+    var phantomjs = spawn.apply(null, ['phantomjs', args]);
     phantomjs.on('exit', function() { sleepyhollow.emit('exit'); });
     phantomjs.stderr.on('data', function(data) {
         data.toString().split('\n').forEach(read);
+    });
+
+    phantomjs.stdout.on('data', function(data) {
+        var errorHandlers = sleepyhollow.listeners('error');
+        if (errorHandlers && errorHandlers.length > 0)
+            sleepyhollow.emit('error', data.toString());
     });
 
     // the writing mechanism, which drains periodically
