@@ -12,5 +12,17 @@ talker.on('render', function() {
 })
 
 talker.on('exit', function() {
+    console.log('exit')
     process.exit();
+})
+
+setInterval(function() {
+    talker.emit('hello');
+    // talker.emit('ack')
+}, 1e3)
+
+
+
+talker.on('ack', function(value) {
+    console.log('phantomjs:', value)
 })

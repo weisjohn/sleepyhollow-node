@@ -4,8 +4,13 @@ var spawn = require('child_process').spawn
 
 function necromancer(args) {
 
-    // the event emitter bridge
+    // the modified event-emitter bridge
     var necromancer = new EventEmitter();
+    _emit = necromancer.emit;
+    necromancer.emit = function(event, message) {
+        if (event !== "ack") write({ event: event, message : message });
+        _emit.apply(necromancer, Array.prototype.slice.call(arguments, 0));
+    }
 
     // the phantomjs process
     var phantomjs = spawn('phantomjs', args);
@@ -14,7 +19,7 @@ function necromancer(args) {
         data.toString().split('\n').forEach(read);
     });
 
-    // the write buffer
+    // the writing mechanism, which drains periodically
     var writeBuffer = [];
     function write(obj) { writeBuffer.push(JSON.stringify(obj)); }
     function _write() {
@@ -27,17 +32,11 @@ function necromancer(args) {
         if (!data) return;
         try { data = JSON.parse(data) }
         catch (e) { console.log(e, data); throw new Error(e); }
-        necromancer.emit(data.event, data.message);
+        _emit.apply(necromancer, [data.event, data.message]);
         if (data.event == "ack") return;
         write({ "event": "ack" });
         _write();
     }
-
-    // event dispatching
-    necromancer.on('write', function(event, message) {
-        if (event == "ack") throw new Error("ack is a reserved event");
-        write({ event: event, message : message });
-    });
 
     return necromancer;
 }
