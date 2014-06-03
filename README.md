@@ -9,14 +9,13 @@ To send and receive messages from Node.js to PhantomJS, require and invoke `slee
 
 ```
 var sleepyhollow = require('sleepyhollow-node');
-var drjekyll = sleepyhollow('some-phantom-script.js');
+var drjekyll = sleepyhollow('phantom-code.js');
 
 drjekyll.emit('render', "http://github.com/");
 drjekyll.on('rendered', function() {
     console.log('a page was rendered');
+    drjekyll.emit('end');
 });
-
-drjekyll.emit('end');
 ```
 
 [See the usage example for the corresponding PhantomJS code](https://github.com/weisjohn/sleepyhollow-phantom#usage).
