@@ -39,7 +39,16 @@ function sleepyhollow() {
         if (!data) return;
         try { data = JSON.parse(data) }
         catch (e) { console.log(e, data); throw new Error(e); }
-        _emit.apply(sleepyhollow, [data.event, data.message]);
+
+        //push data.message into a buffer
+        messageBuffer.push(data.message);
+
+        //emit the message if we have the whole thing -- otherwise skip the emission until later
+        if(!data.isMultipart || data.isEof){
+            _emit.apply(sleepyhollow, [data.event, messageBuffer.join('')]);
+            messageBuffer = [];//reset the buffer
+        }//else{ console.log('\n\n ***BUFFERING*** \n\n',data); }; //<== uncomment the else stmt for debugging
+
         if (data.event == "ack") return;
         write({ "event": "ack" });
         _write();
