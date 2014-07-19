@@ -35,9 +35,11 @@ function sleepyhollow() {
     }
 
     // the read mechanism that selectively writes
-    function read(data) {
-        if (!data) return;
-        try { data = JSON.parse(data) }
+    var messageBuffer = [];
+    
+    function read(data_) {
+        if (!data_) return;
+        try { data = JSON.parse(data_) }
         catch (e) { console.log(e, data); throw new Error(e); }
 
         //push data.message into a buffer
@@ -46,7 +48,7 @@ function sleepyhollow() {
         //emit the message if we have the whole thing -- otherwise skip the emission until later
         if(!data.isMultipart || data.isEof){
             _emit.apply(sleepyhollow, [data.event, messageBuffer.join('')]);
-            messageBuffer = [];//reset the buffer
+            messageBuffer = [];//flush the buffer
         }//else{ console.log('\n\n ***BUFFERING*** \n\n',data); }; //<== uncomment the else stmt for debugging
 
         if (data.event == "ack") return;
