@@ -35,6 +35,7 @@ function sleepyhollow() {
     }
 
     // the read mechanism that selectively writes
+
     var readBuffer = [];
     function read(data) {
 
