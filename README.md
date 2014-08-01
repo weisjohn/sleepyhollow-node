@@ -49,4 +49,13 @@ var me = sleepyhollow('--ignore-ssl-errors=true', 'myscript.js');
 
 ### examples
 
-See the [examples](examples) folder, these can be run with `node`.
+See the [examples](examples) folder, these can be run with `node`.  
+
+
+### testing
+
+To run tests. `cd` to the directory containing `node_modules`. then run...
+
+```
+$ node node_modules/sleepyhollow-node/test.js
+```
