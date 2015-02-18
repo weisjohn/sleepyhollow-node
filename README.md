@@ -65,7 +65,7 @@ drjekyll.on('payload', function(obj) {
 ```
 
 
-### errors & debugging
+### errors
 
 The error support in PhantomJS isn't the best. `sleepyhollow` provides one custom event to listen for errors in your script:
 
@@ -80,6 +80,16 @@ drjekyll.on('error', function(data) {
 Anything that comes across `stdout` will be passed over to the `error` event handler, so if you `console.log` in your PhantomJS code, it will be sent to that handler.
 
 
+### exit
+
+If the child `phantomjs` process exits, an `exit` event is emitted.
+
+```javascript
+drjekyll.on('exit', function() {
+    console.log("phantom exited");
+    process.exit();
+});
+```
 
 ### examples
 
