@@ -15,9 +15,11 @@ function sleepyhollow() {
     // the phantomjs process
     var args = Array.prototype.slice.call(arguments, 0);
     var phantomjs = spawn.apply(null, ['phantomjs', args]);
+
+    // special listener to the child process lifecycle
     phantomjs.on('exit', function() { sleepyhollow.emit('exit'); });
 
-    // we use the stderr channel for communication because we listen on 
+    // we use the stderr channel for communication because we listen on
     // stdout for errors and debugging statements
     phantomjs.stderr.on('data', function(data) {
         data.toString().split('\n').forEach(read);
