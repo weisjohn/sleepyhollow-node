@@ -14,6 +14,20 @@ needed.forEach(function(need) {
     });
 });
 
+// generate a large string of alphabetical characters
+var len = 1e4, mod = 26, pad = 65;
+var challenge = [];
+for (var i = 0; i < len; i++) {
+    var c = (i % mod) + pad;
+    challenge += String.fromCharCode(c);
+}
+
+// add a special case, to check for the large string
+needed.push("output");
+drjekyll.on("output", function(response) {
+    assert.equal(challenge, response, "buffered communication failure");
+});
+
 // tell mrhyde to open github.com
 setTimeout(function() { drjekyll.emit('page', "https://github.com/"); }, 1e3);
 drjekyll.on('render', function() { drjekyll.emit("end"); });
@@ -29,5 +43,6 @@ drjekyll.on('exit', function() {
         assert(found, need + " event was not fired");
         if (!found) success = false;
     });
+
     process.exit(success ? 0 : 1);
 });
