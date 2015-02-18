@@ -26,6 +26,7 @@ for (var i = 0; i < len; i++) {
 needed.push("output");
 drjekyll.on("output", function(response) {
     assert.equal(challenge, response, "buffered communication failure");
+    events.push("output");
 });
 
 // tell mrhyde to open github.com
