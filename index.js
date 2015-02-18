@@ -60,7 +60,7 @@ function sleepyhollow() {
 
             // join up the buffer, silently fail if not an object
             var message = readBuffer.join('');
-            if (message && typeof message !== "object") {
+            if (message) {
                 try { message = JSON.parse(message); }
                 catch (e) { console.log(e, message); throw new Error(e); }
                 args.push(message);
