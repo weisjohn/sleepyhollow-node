@@ -91,6 +91,9 @@ drjekyll.on('exit', function() {
 });
 ```
 
+If your Node process is exiting, sleepyhollow sends a `SIGINT` to tear down the phantomjs side.
+
+
 ### examples
 
 See the [examples](examples) folder, these can be run with `node`.
