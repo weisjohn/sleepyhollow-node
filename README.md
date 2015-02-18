@@ -9,16 +9,31 @@ To send and receive messages from Node.js to PhantomJS, require and invoke `slee
 
 ```
 var sleepyhollow = require('sleepyhollow-node');
-var drjekyll = sleepyhollow('phantom-code.js');
+var drjekyll = sleepyhollow('./node_modules/sleepyhollow-phantom/examples/simple.js');
 
-drjekyll.emit('render', "http://github.com/");
+drjekyll.emit('render', "http://example.com/");
 drjekyll.on('rendered', function() {
     console.log('a page was rendered');
     drjekyll.emit('end');
 });
 ```
 
-#### `emit(event, [param])`
+#### sleepyhollow([...options], path)
+
+Arguments:
+
+1. options: Array: optional [advanced options](http://phantomjs.org/api/command-line.html) to be passed to PhantomJS.
+2. path: String: the path to your PhantomJS code to run (using sleepyhollow-phantom)
+
+[See the usage example for the corresponding PhantomJS code](https://github.com/weisjohn/sleepyhollow-phantom#usage).
+
+Example:
+
+```javascript
+var drjekyll = sleepyhollow('--ignore-ssl-errors=true', 'myscript.js');
+```
+
+#### emit(event, [param])
 
 Arguments:
 
@@ -34,7 +49,7 @@ drjekyll.emit("fetch", url);
 ```
 
 
-#### `on(event, listener)`
+#### on(event, listener)
 
 Arguments:
 
@@ -49,10 +64,8 @@ drjekyll.on('payload', function(obj) {
 })
 ```
 
-[See the usage example for the corresponding PhantomJS code](https://github.com/weisjohn/sleepyhollow-phantom#usage).
 
-
-### errors
+### errors & debugging
 
 The error support in PhantomJS isn't the best. `sleepyhollow` provides one custom event to listen for errors in your script:
 
@@ -64,18 +77,8 @@ drjekyll.on('error', function(data) {
 });
 ```
 
-Anything that comes across `stdout` will be passed over to the `error` event handler, so if you `console.log` from your PhantomJS code, it will be sent to that handler.
+Anything that comes across `stdout` will be passed over to the `error` event handler, so if you `console.log` in your PhantomJS code, it will be sent to that handler.
 
-
-### options
-
-To run PhantomJS with [advanced options](http://phantomjs.org/api/command-line.html), you can simply pass them when you invoke `sleepyhollow`. 
-
-For example, to tell PhantomJS to ignore ssl errors:
-
-```
-var me = sleepyhollow('--ignore-ssl-errors=true', 'myscript.js');
-```
 
 
 ### examples
