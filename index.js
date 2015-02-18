@@ -53,7 +53,7 @@ function sleepyhollow() {
         if (data.message) readBuffer.push(data.message);
 
         // emit if this data is not multipart or it's the last message
-        if (!data.isMultipart || data.isEof) {
+        if (!data.isMultipart || data.isEOF) {
 
             // build up the args to emit
             var args = [data.event];
