@@ -50,3 +50,10 @@ var me = sleepyhollow('--ignore-ssl-errors=true', 'myscript.js');
 ### examples
 
 See the [examples](examples) folder, these can be run with `node`.
+
+
+### testing
+
+```
+$ npm test
+```
